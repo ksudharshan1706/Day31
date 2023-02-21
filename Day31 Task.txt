@@ -5,29 +5,16 @@ CREATE TABLE movies (
   director VARCHAR(255),
   genre VARCHAR(255),
   runtime_minutes INT,
-  rating DECIMAL(3,1)
-);
-
-CREATE TABLE movies (
-  id INT PRIMARY KEY,
-  title VARCHAR(255) NOT NULL,
-  release_year INT,
-  director VARCHAR(255),
-  genre VARCHAR(255),
-  runtime_minutes INT,
   media_type ENUM('url'),
   rating DECIMAL(3,1)
 );
 
-
-INSERT INTO movies (id, title, release_year, director, genre, runtime_minutes, rating) 
-VALUES
-  (1, 'The Shawshank Redemption', 1994, 'Frank Darabont', 'Drama', 142, 9.3),
-  (2, 'The Godfather', 1972, 'Francis Ford Coppola', 'Crime', 175, 9.2),
-  (3, 'The Dark Knight', 2008, 'Christopher Nolan', 'Action', 152, 9.0),
-  (4, 'Pulp Fiction', 1994, 'Quentin Tarantino', 'Crime', 154, 8.9),
-  (5, 'Forrest Gump', 1994, 'Robert Zemeckis', 'Drama', 142, 8.8);
-
+INSERT INTO movies (id, title, release_year, director, genre, runtime_minutes, media_type, rating) VALUES
+  (1, 'The Dark Knight', 2008, 'Christopher Nolan', 'Action', 152, 'video', 9.0),
+  (2, 'Inception', 2010, 'Christopher Nolan', 'Action', 148, 'video', 8.8),
+  (3, 'Pulp Fiction', 1994, 'Quentin Tarantino', 'Crime', 154, 'video', 8.9),
+  (4, 'The Shawshank Redemption', 1994, 'Frank Darabont', 'Drama', 142, 'video', 9.3),
+  (5, 'Forrest Gump', 1994, 'Robert Zemeckis', 'Drama', 142, 'video', 8.8);
 
 -----------------------------------------------------------------------------------------------------
 CREATE TABLE users (
