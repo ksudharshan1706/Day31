@@ -1,0 +1,84 @@
+CREATE TABLE movies (
+  id INT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  release_year INT,
+  director VARCHAR(255),
+  genre VARCHAR(255),
+  runtime_minutes INT,
+  rating DECIMAL(3,1)
+);
+
+CREATE TABLE movies (
+  id INT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  release_year INT,
+  director VARCHAR(255),
+  genre VARCHAR(255),
+  runtime_minutes INT,
+  media_type ENUM('url'),
+  rating DECIMAL(3,1)
+);
+
+
+INSERT INTO movies (id, title, release_year, director, genre, runtime_minutes, rating) 
+VALUES
+  (1, 'The Shawshank Redemption', 1994, 'Frank Darabont', 'Drama', 142, 9.3),
+  (2, 'The Godfather', 1972, 'Francis Ford Coppola', 'Crime', 175, 9.2),
+  (3, 'The Dark Knight', 2008, 'Christopher Nolan', 'Action', 152, 9.0),
+  (4, 'Pulp Fiction', 1994, 'Quentin Tarantino', 'Crime', 154, 8.9),
+  (5, 'Forrest Gump', 1994, 'Robert Zemeckis', 'Drama', 142, 8.8);
+
+
+-----------------------------------------------------------------------------------------------------
+CREATE TABLE users (
+  user_id INT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255),
+  phone VARCHAR(20),
+  mid INT,
+  FOREIGN KEY (mid) REFERENCES movies(id)
+);
+
+INSERT INTO users (user_id, name, email, phone, mid)
+VALUES
+  (1, 'Alice', 'alice@example.com', '123-456-7890', 1),
+  (2, 'Bob', 'bob@example.com', '123-456-7891', 2),
+  (3, 'Charlie', 'charlie@example.com', '123-456-7892', 3),
+  (4, 'Dave', 'dave@example.com', '123-456-7893', 4),
+  (5, 'Eve', 'eve@example.com', '123-456-7894', 5),
+  (6, 'Frank', 'frank@example.com', '123-456-7895', 1),
+  (7, 'Grace', 'grace@example.com', '123-456-7896', 2),
+  (8, 'Henry', 'henry@example.com', '123-456-7897', 3),
+  (9, 'Isaac', 'isaac@example.com', '123-456-7898', 4),
+  (10, 'Jane', 'jane@example.com', '123-456-7899', 5);
+
+--------------------------------------------------------------------------------------------------------
+CREATE TABLE reviews (
+  id INT PRIMARY KEY,
+  movie_id INT,
+  user_id INT,
+  rating DECIMAL(3,1),
+  comment VARCHAR(1000),
+  FOREIGN KEY (movie_id) REFERENCES movies(id),
+  FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+INSERT INTO reviews (id, movie_id, user_id, rating, comment) VALUES
+(1, 1, 1, 9.0, 'Great movie, highly recommend!'),
+(2, 2, 2, 8.5, 'One of the best movies of all time.'),
+(3, 3, 3, 9.1, 'An absolute masterpiece.'),
+(4, 4, 4, 8.7, 'Action-packed and intense.'),
+(5, 5, 5, 9.2, 'Tom Hanks is amazing in this movie.'),
+(6, 1, 6, 8.0, 'Enjoyed this movie, would watch again.'),
+(7, 2, 7, 7.5, 'A classic that still holds up.'),
+(8, 3, 8, 8.8, 'Incredible performances all around.'),
+(9, 4, 9, 9.5, 'One of my all-time favorites.'),
+(10, 5, 10, 7.8, 'Great movie but not as good as the book.');
+-------------------------------------------------------------------------------------------------------------
+
+SELECT movies.title,users.name, reviews.rating, reviews.comment
+FROM reviews
+JOIN movies ON reviews.movie_id = movies.id
+JOIN users ON reviews.user_id = users.user_id
+--WHERE movies.title = 'Forrest Gump';
+
